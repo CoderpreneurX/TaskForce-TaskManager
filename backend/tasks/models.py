@@ -4,7 +4,7 @@ import uuid
 
 class TaskComment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    task = models.ForeignKey("Task", on_delete=models.CASCADE, related_name="comments")
+    task = models.ForeignKey("Task", on_delete=models.CASCADE, related_name="task")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,7 +28,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=status_choices, default='INCOMPLETE')
     assigned_members = models.ManyToManyField(User, related_name="assigned_tasks")
-    comments = models.ManyToManyField('TaskComment')
+    comments = models.ManyToManyField('TaskComment', related_name='task_comments')
 
     def __str__(self):
         return f'{self.creator.username} - {self.title}'

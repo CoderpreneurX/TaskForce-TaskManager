@@ -28,7 +28,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=status_choices, default='INCOMPLETE')
     assigned_members = models.ManyToManyField(User, related_name="assigned_tasks")
-    comments = models.ManyToManyField('TaskComment', related_name='task_comments')
+    comments = models.ManyToManyField('TaskComment', related_name='task_comments', blank=True)
 
     def __str__(self):
         return f'{self.creator.username} - {self.title}'

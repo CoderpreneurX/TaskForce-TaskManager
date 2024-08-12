@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 from authentication.config import apply_configurations as apply_auth_configurations
+from tasks.config import apply_configurations as apply_tasks_configurations
 
 load_dotenv()
 
@@ -107,3 +108,4 @@ REST_FRAMEWORK = {
 }
 
 apply_auth_configurations(globals())
+apply_tasks_configurations(globals())

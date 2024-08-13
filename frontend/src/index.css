@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --primary-color: #87CEEB;
+    --secondary-color: #f9f9f9;
+    --tertiary-color: #FF9900;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+input.inp-primary, textarea.inp-primary, button.btn-primary {
+    @apply border-2 mb-2 rounded border-b-4 border-black px-4 py-2 w-full;
+}
+
+input.inp-primary, textarea.inp-primary {
+    @apply bg-secondary;
+}
+
+button.btn-primary {
+    @apply bg-tertiary font-bold;
+}
+
+div.failure {
+    @apply bg-red-500;
+}
+
+div.success {
+    @apply bg-green-500;
+}
+
+@layer components {
+    .bg-secondary {
+        background-color: var(--secondary-color);
+    }
+
+    .bg-tertiary {
+        background-color: var(--tertiary-color);
+    }
+}

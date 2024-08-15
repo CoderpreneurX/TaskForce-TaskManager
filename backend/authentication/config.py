@@ -18,4 +18,7 @@ def apply_configurations(globals_dict: dict):
 
     globals_dict['SIMPLE_JWT'] = simple_jwt_settings
 
+    globals_dict['CORS_ALLOW_ALL_ORIGINS'] = True
+    globals_dict['CORS_ALLOW_CREDENTIALS'] = True
+
     globals_dict['EMAIL_BACKEND'] = 'django.core.mail.backends.console.EmailBackend'

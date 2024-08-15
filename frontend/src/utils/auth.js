@@ -17,7 +17,6 @@ export async function loginUser(formData) {
                     message: 'Login successful!',
                     type: 'success'
                 }
-                break
         }
     }).catch((error) => {
         if (error.response) {

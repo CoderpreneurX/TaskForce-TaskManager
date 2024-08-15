@@ -27,7 +27,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=status_choices, default='INCOMPLETE')
-    assigned_members = models.ManyToManyField(User, related_name="assigned_tasks")
+    assigned_members = models.ManyToManyField(User, related_name="assigned_tasks", blank=True)
     comments = models.ManyToManyField('TaskComment', related_name='task_comments', blank=True)
 
     def __str__(self):

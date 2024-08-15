@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import generics
+from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import UserSerializer, ProfileSerializer
 from .models import Profile
@@ -57,3 +58,11 @@ class RetrieveUserProfileView(generics.RetrieveAPIView):
         user = self.request.user
         profile = self.queryset.get(user=user)
         return profile
+    
+class ListUsersAPIView(generics.GenericAPIView):
+    authentication_classes = []
+    def post(self, request, *args, **kwargs):
+        search_query = request.data.get('query')
+        users = User.objects.filter(username__icontains=search_query)
+        serializer = UserSerializer(users, many=True)
+        return Response(data=serializer.data, status=200)

@@ -14,6 +14,23 @@ class CreateTaskAPIView(generics.CreateAPIView):
         serializer.save(creator=user)
         return serializer
     
+class ListTasksAPIView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TaskSerializer
+    queryset = Task.objects.all()
+
+    def get(self, request):
+        user = self.request.user
+        tasks_created = Task.objects.filter(creator=user)
+        tasks_created = self.serializer_class(tasks_created, many=True)
+        tasks_assigned = Task.objects.filter(assigned_members=user)
+        tasks_assigned = self.serializer_class(tasks_assigned, many=True)
+        data = {
+            'tasks_created': tasks_created.data,
+            'tasks_assigned': tasks_assigned.data,
+            }
+        return Response(data=data, status=200)
+
 class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

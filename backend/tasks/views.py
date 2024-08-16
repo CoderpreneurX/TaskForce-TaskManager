@@ -13,7 +13,7 @@ class CreateTaskAPIView(generics.CreateAPIView):
         user = self.request.user
         serializer.save(creator=user)
         return serializer
-
+    
 class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -21,6 +21,13 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class TaskCommentListCreateView(generics.ListCreateAPIView):
     queryset = TaskComment.objects.all()
     serializer_class = TaskCommentSerializer
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        task = Task.objects.get(pk=self.kwargs['pk'])
+        comment = serializer.save(task=task, user=user)
+        task.comments.add(comment)
+        return serializer
 
 class TaskCommentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = TaskComment.objects.all()

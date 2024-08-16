@@ -12,24 +12,8 @@ body {
     background-color: var(--primary-color);
 }
 
-input.inp-primary, textarea.inp-primary, button.btn-primary {
-    @apply border-2 mb-2 rounded border-b-4 border-black px-4 py-2 w-full;
-}
-
-input.inp-primary, textarea.inp-primary {
-    @apply bg-secondary;
-}
-
 button.btn-primary {
-    @apply bg-tertiary font-bold;
-}
-
-div.failure {
-    @apply bg-red-500;
-}
-
-div.success {
-    @apply bg-green-500;
+    @apply px-4 py-2 rounded border-2 border-b-4 border-black bg-tertiary font-bold;
 }
 
 @layer components {
